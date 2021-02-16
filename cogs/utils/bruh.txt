@@ -1,0 +1,86 @@
+-----yes this is very messy ik bruhhhhhhhhhhhhhhhhhh------
+
+from datetime import datetime
+import discord
+from discord.ext import commands
+from cogs.utils import config
+
+
+class Help(commands.Cog):
+  
+  def __init__(self, client):
+    self.client = client
+  
+  @commands.group(invoke_without_command= True)
+  async def help(self, ctx):
+    em = discord.Embed(title = "Help", description = "Use .help [command] for help.", timestamp=datetime.utcnow(), color = ctx.author.color)
+    
+    em.add_field(name = "Moderation", value = "`kick` `ban`")
+    em.add_field(name = "Miscellaneous", value = "`ping`")
+    em.add_field(name = "Manager", value = "`addrole` `removerole`")
+    em.set_footer(text=f"{config.tm} {config.Version}")
+    
+    await ctx.send(embed=em)
+  
+  # ↓ __________Moderation__________ ↓ #
+  @help.command()
+  async def kick(self, ctx):
+    
+    em = discord.Embed(title = "Kick", description = "Kick a member from the server.", timestamp=datetime.utcnow(), color=ctx.author.color)
+
+    em.add_field(name = "**Usage**", value = "`.kick [member] [reason]`", inline=False)
+    em.add_field(name = "**Example**", value = ".kick @TheHa3ker you're bad\n" 
+    ".kick 341837496763678731 you're bad", inline=False)
+    em.set_footer(text=f"{config.tm} {config.Version}")
+
+    await ctx.send(embed=em)
+  
+  @help.command()
+  async def ban(self, ctx):
+    
+    em = discord.Embed(title = "Ban", description = "Ban a member from the server.", timestamp=datetime.utcnow(), color=ctx.author.color)
+
+    em.add_field(name = "**Usage**", value = "`.ban [member] [reason]`", inline=False)
+    em.add_field(name = "**Example**", value = ".ban @TheHa3ker you broke a rule\n" 
+    ".ban 341837496763678731 you broke a rule", inline=False)
+    em.set_footer(text=f"{config.tm} {config.Version}")
+
+    await ctx.send(embed=em)
+
+  # ↓ __________Miscellaneous__________ ↓ #
+  @help.command()
+  async def ping(self, ctx):
+    
+    em = discord.Embed(title = "Ping", description = "Get the bot's API response time.", timestamp=datetime.utcnow(),color=ctx.author.color)
+    
+    em.add_field(name = "**Usage**", value = "`.ping`")
+    em.set_footer(text=f"{config.tm} {config.Version}")
+
+    await ctx.send(embed=em)
+
+  # ↓ __________Manager__________ ↓ #
+  @help.command()
+  async def addrole(self, ctx):
+    
+    em = discord.Embed(title = "Addrole", description = "Add a role to a member.", timestamp=datetime.utcnow(), color=ctx.author.color)
+
+    em.add_field(name = "**Usage**", value = "`.addrole [roleid] [member]`")
+    em.add_field(name = "**Example**", value = ".addrole 739124569843 @TheHa3ker")
+    em.set_footer(text=f"{config.tm} {config.Version}")
+
+    await ctx.send(embed=em)
+  
+  @help.command()
+  async def removerole(self, ctx):
+    
+    em = discord.Embed(title = "Removerole", description = "Remove a role to a member.", timestamp=datetime.utcnow(), color=ctx.author.color)
+
+    em.add_field(name = "**Usage**", value = "`.removerole [roleid] [member]`")
+    em.add_field(name = "**Example**", value = ".removerole 739124569843 @TheHa3ker")
+    em.set_footer(text=f"{config.tm} {config.Version}")
+
+    await ctx.send(embed=em)
+
+
+def setup(client):
+    client.add_cog(Help(client))
