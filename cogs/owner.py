@@ -10,10 +10,6 @@ class Owner(commands.Cog, command_attrs=dict(hidden=True)):
   def __init__(self, client):
     self.client = client
 
-  async def restart_bot(self):
-    await self.client.logout()
-    subprocess.call([sys.executable, "main.py"])  
-
   async def stop_bot(self):
     await self.client.logout()
 
